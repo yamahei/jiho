@@ -9,7 +9,7 @@ require_relative './jiho'
 # server
 class MyApp < Sinatra::Base
 
-    CMD_PATH = File.expand_path("../cmd/rubycast/bin/googlehome.rb", __FILE__)
+    CMD_PATH = File.expand_path("../rubycast/bin/googlehome.rb", __FILE__)
     LIST_PATH = File.expand_path("../jiho_list.yaml", __FILE__)
     TIME_FORMAT = /^\d{2}:\d{2}$/
     YOBI_FORMAT = /^日?月?火?水?木?金?土?$/

@@ -19,7 +19,6 @@ Google Homeを喋らせるコマンドは[yamahei/rubycast](https://github.com/y
 $ git clone https://github.com/yamahei/jiho.git
 $ cd jiho
 $ bundle install
-$ cd cmd
 $ git clone https://github.com/yamahei/rubycast.git
 $ cd rubycast
 $ bundle install

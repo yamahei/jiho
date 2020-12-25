@@ -75,7 +75,7 @@ GEM
     tilt (2.0.10)
 
 PLATFORMS
-  x64-mingw32
+  ruby
 
 DEPENDENCIES
   eventmachine!
@@ -85,4 +85,4 @@ DEPENDENCIES
   sinatra-validation
 
 BUNDLED WITH
-   2.2.2
+   1.16.1
