@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jiho</title>
+    <link rel="stylesheet" href="css/bulma.0.9.0.min.css">
+    <link rel="stylesheet" href="css/font-awesome.4.7.0.min.css" />
+    <link rel="stylesheet" href="css/common.css" />
+</head>
+
+
+<body>
+
+<!--
+    Components
+-->
+<script type="text/x-template" id="XXX_TEMPLATE">
+    <div ui="xxx">
+    </div>
+</script>
+
+<!--
+    Pages
+-->
+<script type="text/x-template" id="WORK_PAGE_TEMPLATE">
+    <div ui="page">
+
+        <div style="text-align: right">
+            <button class="button is-small is-primary" @click="on_click_save">
+                <span class="icon">
+                    <i class="fa fa-cloud-upload"></i>
+                </span>
+                <span>Save</span>
+            </button>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>at</th>
+                <th>yobi</th>
+                <th>device</th>
+                <th>content</th>
+                <th></th>
+            </tr>
+            <tr v-for="item in list">
+                <td>
+                    <button class="button is-small is-danger" @click="on_click_delete(item)">
+                        <span class="icon">
+                            <i class="fa fa-trash"></i>
+                        </span>
+                    </button>
+                </td>
+                <td>{{ item.at }}</td>
+                <td>{{ item.yobi }}</td>
+                <td>{{ item.device }}</td>
+                <td>{{ item.content }}</td>
+                <td>
+                    <button class="button is-small" @click="on_click_edit(item)">
+                        <span class="icon">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </span>
+                        <span>Edit</span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <button class="button is-fullwidth" @click="on_click_append()">
+                <span class="icon">
+                    <i class="fa fa-plus-circle"></i>
+                </span>
+                <span>
+                    Append Jiho
+                </span>
+            </button>
+        </p>
+
+        <modal @ok="on_modal_ok" @test="on_modal_test"></modal>
+    </div>
+
+</script>
+
+
+<!--
+    App
+ -->
+<div id="app">
+
+    <section id="header">
+        <h1 class="title">
+            Jiho
+        </h1>
+    </section>
+
+    <section id="pages" class="_section">
+        <div class="container is-fluid">
+            <transition name="fade">
+                <router-view></router-view>
+            </transition>
+        </div>
+    </section>
+
+    <section id="footer" class="mt-4 mb-4">
+        <p style="text-align: center;">
+            &copy; 2020 yamahei
+        </p>
+    </section>
+
+    <loader :visible="loader_visible"></loader>
+</div>
+
+ <!--
+    Include
+ -->
+ <div>
+
+    <script src="js/dateformat.js"></script>
+    <script src="js/util.js"></script>
+
+    <script src="js/axios.0.19.2.js"></script>
+    <script src="js/api.js"></script>
+
+    <script src="js/vue.2.6.11.js"></script>
+    <script src="js/vue-router.3.3.4.js"></script>
+    <script src="js/vue-filter.js"></script>
+    <script src="js/components/loader.js"></script>
+    <script src="js/components/popup.js"></script>
+    <script src="js/components/modal.js"></script>
+    <script src="js/pages/vue-page-work.js"></script>
+
+    <script src="js/app.js"></script>
+
+</div>
+</body>
+</html>
