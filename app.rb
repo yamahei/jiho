@@ -4,7 +4,7 @@ Bundler.require
 require 'yaml'
 require 'json'
 
-require_relative './jiho'
+require_relative './lib/jiho'
 
 # server
 class MyApp < Sinatra::Base
@@ -16,14 +16,14 @@ class MyApp < Sinatra::Base
 
     # tick
     EM::defer do
-        Jiho.set_cmd_path(CMD_PATH)
         loop do
             begin
-                Jiho.tick
-            rescue => e
-                p e
+                yaml = `cat #{LIST_PATH}` || "[]"
+                Jiho.tick YAML.load(yaml)
+            rescue=> e
+                puts e.full_message
             ensure
-                sleep 30
+                sleep 15
             end
         end
     end
@@ -55,9 +55,8 @@ class MyApp < Sinatra::Base
 
     get '/list' do
         if FileTest.exist?(LIST_PATH) then
-            list = YAML.load_file(LIST_PATH).to_json
-            Jiho.set_list(list)
-            list
+            list = YAML.load_file(LIST_PATH)
+            list.to_json
         else
             [].to_json
         end
@@ -76,7 +75,6 @@ class MyApp < Sinatra::Base
         list = params[:list].map{|e| e.to_h }#IndifferentHash -> Hash
         yaml = YAML.dump(list)
         File.write(LIST_PATH, yaml)
-        Jiho.set_list(list)
         200
     end
 

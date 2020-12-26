@@ -56,4 +56,4 @@ Gemfile.lock
 # .rubocop-https?--*
 
 jiho_list.yaml
-cmd/rubycast
+lib/JIHO_LAST_PATH

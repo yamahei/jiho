@@ -9,4 +9,10 @@ gem 'rack-contrib'
 gem 'sinatra', '~> 2.0.0.rc2'
 gem 'sinatra-validation'
 gem 'sinatra-contrib'
-gem 'eventmachine', :github => 'eventmachine/eventmachine'
+
+gem 'eventmachine'
+# for mdns, castv2 ?
+gem 'protobuf'
+gem 'dnssd'
+gem 'sys-proctable'
+gem 'erector'
