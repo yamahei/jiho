@@ -19,7 +19,7 @@ class MyApp < Sinatra::Base
         loop do
             begin
                 yaml = `cat #{LIST_PATH}` || "[]"
-                Jiho.tick YAML.load(yaml)
+                Jiho.tick(YAML.load(yaml))
             rescue=> e
                 puts e.full_message
             ensure
@@ -83,7 +83,10 @@ class MyApp < Sinatra::Base
             optional(:device).maybe(:string)
             required(:content).filled(:string)
         }}
-        Jiho.talk(params[:device], params[:content])
+        Thread.new(params[:device], params[:content]) {|_device, _url|
+            Thread.pass
+            Jiho.talk(_device, _url)
+        }
         200
     end
 

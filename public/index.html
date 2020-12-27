@@ -35,37 +35,37 @@
             </button>
         </div>
 
-        <table class="table">
-            <tr>
-                <th></th>
-                <th>at</th>
-                <th>yobi</th>
-                <th>device</th>
-                <th>content</th>
-                <th></th>
-            </tr>
-            <tr v-for="item in list">
-                <td>
-                    <button class="button is-small is-danger" @click="on_click_delete(item)">
-                        <span class="icon">
-                            <i class="fa fa-trash"></i>
-                        </span>
-                    </button>
-                </td>
-                <td>{{ item.at }}</td>
-                <td>{{ item.yobi }}</td>
-                <td>{{ item.device }}</td>
-                <td>{{ item.content }}</td>
-                <td>
-                    <button class="button is-small" @click="on_click_edit(item)">
-                        <span class="icon">
-                            <i class="fa fa-pencil-square-o"></i>
-                        </span>
-                        <span>Edit</span>
-                    </button>
-                </td>
-            </tr>
-        </table>
+        <div class="table-container">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <template v-for="item in list">
+                    <tr>
+                        <td>
+                            <button class="button is-small" @click="on_click_edit(item)">
+                                <span class="icon">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </span>
+                                <span>Edit</span>
+                            </button>
+                        </td>
+                        <td>{{ item.at }}</td>
+                        <td>{{ item.yobi }}</td>
+                        <td>{{ item.device }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3">{{ item.content }}</td>
+                        <td>
+                            <button class="button is-small is-danger" @click="on_click_delete(item)">
+                                <span class="icon">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </button>
+                        </td>
+                    </tr>
+                </template>
+            </table>
+        </div>
 
         <p>
             <button class="button is-fullwidth" @click="on_click_append()">

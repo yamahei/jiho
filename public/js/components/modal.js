@@ -50,10 +50,10 @@
                 </div>
                 <div class="field is-grouped">
                     <p class="control">
-                        <input class="input" type="text" v-model="device" placeholder="GoogleHome name">
+                        <input class="input" type="text" v-model="device" placeholder="GoogleHome名: 空のとき全部">
                     </p>
                     <p class="control is-expanded">
-                        <input class="input" type="text" v-model="content" placeholder="MP3 URL or Message">
+                        <input class="input" type="text" v-model="content" placeholder="文書 or MP3のURL">
                     </p>
                 </div>
 

@@ -31,7 +31,7 @@ class SearchGoogleHome
             results = `avahi-browse _googlecast._tcp -rt | grep -E "^(=|\s)"`
         rescue => e
             # How to install(Raspberry pi)
-            # $ sudo apt-get install avahi-daemon libnss-mdns
+            # $ sudo apt-get install avahi-daemon libnss-mdns avahi-utils 
             raise RuntimeError.new("avahi-browse実行中のエラー")
         end
 
