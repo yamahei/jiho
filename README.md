@@ -49,6 +49,57 @@ $ bundle exec ruby app.rb
 
 ----
 
+ラズパイでサービス化したメモ
+----------------------------
+
+### 起動コマンドを作成
+
+```
+$ sudo mkdir -p /opt/jiho/bin
+$ sudo nano /opt/jiho/bin/startjiho.sh
+
+  #!/bin/bash
+
+  su - pi
+  cd /home/pi/jiho
+  /home/pi/.rbenv/shims/bundle exec /home/pi/.rbenv/shims/ruby /home/pi/jiho/app.rb
+
+$ sudo chmod +x /opt/jiho/bin/startjiho.sh
+```
+
+## サービスの定義を作成
+
+```
+$ sudo nano /lib/systemd/system/jiho.service
+
+  [Unit]
+  Description = jiho
+  
+  [Service]
+  ExecStart=/opt/jiho/bin/startjiho.sh
+  Restart=always
+  Type=simple
+  
+  [Install]
+  WantedBy=multi-user.target
+
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable jiho 
+```
+
+## 起動
+
+```
+$ sudo systemctl start jiho
+```
+
+## ログ
+
+```
+$ sudo journalctl -f -u jiho
+```
+
+
 その他（言い訳）
 ----------------
 
@@ -67,5 +118,5 @@ mDNSは[jiho/lib/search_googlehome.rb](https://github.com/yamahei/jiho/blob/main
 
 ### まだ怪しい挙動
 
-ひとまず試験運用落として動かしていますが、テキスト読み上げを連続で投げると喋らなくなったりします。
+ひとまず試験運用として動かしていますが、テキスト読み上げを連続で投げると喋らなくなったりします。
 これはCASTV2の終了処理がイマイチな可能性と、（Text To Speechではなく）Google Translate TTSの応答の可能性があります。
