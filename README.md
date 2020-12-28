@@ -67,7 +67,13 @@ $ sudo nano /opt/jiho/bin/startjiho.sh
 $ sudo chmod +x /opt/jiho/bin/startjiho.sh
 ```
 
-## サービスの定義を作成
+### TODO: 停止コマンドを作成
+
+sinatraアプリって`Ctrl + C`2回叩かないと終わらないのがサービスの中でも発生している。
+
+
+
+### サービスの定義を作成
 
 ```
 $ sudo nano /lib/systemd/system/jiho.service
@@ -87,13 +93,13 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl enable jiho 
 ```
 
-## 起動
+### 起動
 
 ```
 $ sudo systemctl start jiho
 ```
 
-## ログ
+### ログ
 
 ```
 $ sudo journalctl -f -u jiho
