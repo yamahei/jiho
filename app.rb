@@ -29,6 +29,7 @@ class MyApp < Sinatra::Base
     end
 
     configure do
+        $stdout.sync = true
         set :bind, '0.0.0.0'
         enable :sessions
         use Rack::JSONBodyParser
