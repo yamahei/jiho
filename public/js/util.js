@@ -80,15 +80,17 @@
     };
     //複数項目で昇順ソート
     util.prototype.sort = function(array, keys){
-        return array.sort(function(a, b){
-            keys.forEach(function(key){
+        const list = array.concat();
+        keys.forEach(function(key){
+            list.sort(function(a, b){
                 const aval = a[key];
                 const bval = b[key];
-                if(aval < bval) return -1;
-                if(aval > bval) return -1;
+                if(aval < bval){ return -1; }
+                if(aval > bval){ return 1; }
+                return 0;    
             });
-            return 0;
         });
+        return list;
     };
 
 

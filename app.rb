@@ -14,12 +14,12 @@ class MyApp < Sinatra::Base
     TIME_FORMAT = /^\d{2}:\d{2}$/
     YOBI_FORMAT = /^日?月?火?水?木?金?土?$/
 
-    # tick
+    # tickgit@github.com:yamahei/jiho.git
     EM::defer do
         loop do
             begin
-                yaml = `cat #{LIST_PATH}` || "[]"
-                Jiho.tick(YAML.load(yaml))
+                yaml = `cat #{LIST_PATH}`
+                Jiho.tick(YAML.load(yaml.empty? ? "[]" : yaml))
             rescue=> e
                 puts e.full_message
             ensure

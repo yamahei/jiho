@@ -22,7 +22,7 @@ const work_page = g.work_page = {
         g.API.get_list().then(function(response){
             const list = response.data || [];
             self.list.splice(0);
-            self.list.push(...list);
+            self.list.push(...Util.sort(list, ["at", "yobi"]));
             if(self.list.length <= 0){
                 self.list.push({
                     at: "00:00",
@@ -67,7 +67,7 @@ const work_page = g.work_page = {
                 original.device = item.device;
                 original.content = item.content;
             }
-            Util.sort(this.list, ["at", "yobi"]);
+            console.log(Util.sort(this.list, ["at", "yobi"]));
         },
         on_modal_test: function($event){
             const device = $event.device;
