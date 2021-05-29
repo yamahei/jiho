@@ -22,12 +22,10 @@ class Jiho
             item["yobi"].include?(yobi)
         }.each{|item|
             device, content = item["device"], item["content"]
-            # url = (content =~ /^https?:/) ? content : "https://translate.google.com/translate_tts?ie=UTF-8&tl=#{lang}&client=tw-ob&q=#{URI.escape(content)}"
-            url = (content =~ /^https?:/) ? content : "http://api.voicerss.org/?key=#{@@VOICERSS_APIKEY}&hl=#{lang}&src=#{URI.escape(content)}"
             begin
-                Thread.new(device, url) {|_device, _url|
+                Thread.new(device, content) {|_device, _content|
                     Thread.pass
-                    talk(_device, _url)
+                    talk(_device, _content)
                 }
             rescue => e
                 puts e.full_messages
@@ -35,8 +33,10 @@ class Jiho
         }
         @@last = now
     end
-    def self.talk name, url
-        puts "Jiho.talk[name=#{name}, url=#{url}]"
+    def self.talk name, content
+        url = (content =~ /^https?:/) ? content : "http://api.voicerss.org/?key=#{@@VOICERSS_APIKEY}&hl=#{lang}&src=#{URI.escape(content)}"
+        puts "Jiho.talk[name=#{name}, content=#{content}]"
+        puts "(url=#{url})" if url != content
         _devices = SearchGoogleHome.scan
         devices = _devices.map{|_device|
             {

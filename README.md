@@ -11,6 +11,9 @@ Google Homeを定時に喋らせます。
 
 Raspberry piで使うことを前提に作っているため、Windows環境では意図的にエラーを出していますのでご注意ください。
 
+音声合成に[Voice RSS](http://www.voicerss.org/)を使っています。
+APIキーを環境変数`VOICERSS_APIKEY`にセットしておいてください。
+
 ![](localhost_4567_index.html.png)
 
 音楽を鳴らす場合は、MP3ファイルへのURLを指定してください。
@@ -54,13 +57,14 @@ $ bundle exec ruby app.rb
 
 ### 起動コマンドを作成
 
-```
+```bash
 $ sudo mkdir -p /opt/jiho/bin
 $ sudo nano /opt/jiho/bin/startjiho.sh
 
   #!/bin/bash
 
   su - pi
+  VOICERSS_APIKEY=YOUR_VOICERSS_APIKEY
   cd /home/pi/jiho
   /home/pi/.rbenv/shims/bundle exec /home/pi/.rbenv/shims/ruby /home/pi/jiho/app.rb
 
@@ -69,7 +73,7 @@ $ sudo chmod +x /opt/jiho/bin/startjiho.sh
 
 ### サービスの定義を作成
 
-```
+```bash
 $ sudo nano /lib/systemd/system/jiho.service
 
   [Unit]
@@ -89,13 +93,13 @@ $ sudo systemctl enable jiho
 
 ### 起動
 
-```
+```bash
 $ sudo systemctl start jiho
 ```
 
 ### ログ
 
-```
+```bash
 $ sudo journalctl -f -u jiho
 ```
 

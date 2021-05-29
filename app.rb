@@ -84,9 +84,9 @@ class MyApp < Sinatra::Base
             optional(:device).maybe(:string)
             required(:content).filled(:string)
         }}
-        Thread.new(params[:device], params[:content]) {|_device, _url|
+        Thread.new(params[:device], params[:content]) {|_device, _content|
             Thread.pass
-            Jiho.talk(_device, _url)
+            Jiho.talk(_device, _content)
         }
         200
     end
