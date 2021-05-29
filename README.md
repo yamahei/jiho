@@ -55,6 +55,13 @@ $ bundle exec ruby app.rb
 ラズパイでサービス化したメモ
 ----------------------------
 
+### ユーザpiの環境変数にVoiceRSSのAPIKeyをセット
+
+```
+nano ~/.bashrc
++ VOICERSS_APIKEY=YOUR_VOICERSS_APIKEY
+```
+
 ### 起動コマンドを作成
 
 ```bash
@@ -64,7 +71,6 @@ $ sudo nano /opt/jiho/bin/startjiho.sh
   #!/bin/bash
 
   su - pi
-  VOICERSS_APIKEY=YOUR_VOICERSS_APIKEY
   cd /home/pi/jiho
   /home/pi/.rbenv/shims/bundle exec /home/pi/.rbenv/shims/ruby /home/pi/jiho/app.rb
 
