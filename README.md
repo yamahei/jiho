@@ -74,17 +74,17 @@ $ sudo nano /lib/systemd/system/jiho.service
 
   [Unit]
   Description = jiho
-  
+
   [Service]
   ExecStart=/opt/jiho/bin/startjiho.sh
   Restart=always
   Type=simple
-  
+
   [Install]
   WantedBy=multi-user.target
 
 $ sudo systemctl daemon-reload
-$ sudo systemctl enable jiho 
+$ sudo systemctl enable jiho
 ```
 
 ### 起動
@@ -120,3 +120,17 @@ mDNSは[jiho/lib/search_googlehome.rb](https://github.com/yamahei/jiho/blob/main
 
 ひとまず試験運用として動かしていますが、テキスト読み上げを連続で投げると喋らなくなったりします。
 これはCASTV2の終了処理がイマイチな可能性と、（Text To Speechではなく）Google Translate TTSの応答の可能性があります。
+
+
+喋らなくなった対応
+------------------
+
+* STT直たたきだと喋るのにJiho経由だと喋らなくなった
+  * [go-chromecast](https://github.com/vishen/go-chromecast)というのがあるらしい→実験する（良かったら採用
+    * これはこれで良いツール
+* 原因はGoogleが機械的なリクエストを拒否するようになったからだった
+* 別のAPIサービス検討
+  * [Voice RSS](http://www.voicerss.org/) が使いやすそう
+    * フリープランでも350リクエスト/日使えるので、Jihoには十分
+    * 「音声でも」を「おとこえ でも」って読んじゃうのはいけてない→運用で対処
+

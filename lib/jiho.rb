@@ -8,8 +8,9 @@ class Jiho
 
     @@last = nil
     @@SEND_CMD = File.expand_path("../send_googlehome.rb", __FILE__)
+    @@VOICERSS_APIKEY = ENV['VOICERSS_APIKEY']
 
-    def self.tick list=[], lang='ja'
+    def self.tick list=[], lang='ja-jp'
         puts "Jiho.ticl[list.length=#{list.length}, lang=#{lang}, @@last=#{@@last}]"
         now = Time.now.strftime("%H:%M")
         yobi = %w(日 月 火 水 木 金 土)[Date.today.wday]
@@ -21,7 +22,8 @@ class Jiho
             item["yobi"].include?(yobi)
         }.each{|item|
             device, content = item["device"], item["content"]
-            url = (content =~ /^https?:/) ? content : "https://translate.google.com/translate_tts?ie=UTF-8&tl=#{lang}&client=tw-ob&q=#{URI.escape(content)}"
+            # url = (content =~ /^https?:/) ? content : "https://translate.google.com/translate_tts?ie=UTF-8&tl=#{lang}&client=tw-ob&q=#{URI.escape(content)}"
+            url = (content =~ /^https?:/) ? content : "http://api.voicerss.org/?key=#{@@VOICERSS_APIKEY}&hl=#{lang}&src=#{URI.escape(content)}"
             begin
                 Thread.new(device, url) {|_device, _url|
                     Thread.pass
