@@ -33,7 +33,7 @@ class Jiho
         }
         @@last = now
     end
-    def self.talk name, content
+    def self.talk name, content, lang='ja-jp'
         url = (content =~ /^https?:/) ? content : "http://api.voicerss.org/?key=#{@@VOICERSS_APIKEY}&hl=#{lang}&src=#{URI.escape(content)}"
         puts "Jiho.talk[name=#{name}, content=#{content}]"
         puts "(url=#{url})" if url != content
